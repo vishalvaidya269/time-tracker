@@ -33,6 +33,17 @@ pipeline:
                   spec:
                     shell: Sh
                     command: echo "code clone from github account"
+              - step:
+                  type: GitClone
+                  name: GitClone_1
+                  identifier: GitClone_1
+                  spec:
+                    connectorRef: account.Github_OAuth_1693812039869
+                    repoName: git@github.com:vishalvaidya269/time-tracker.git
+                    build:
+                      type: branch
+                      spec:
+                        branch: master
     - stage:
         name: BuildCode
         identifier: BuildCode
