@@ -1,0 +1,66 @@
+pipeline:
+  name: TimeTrackerPipeline
+  identifier: TimeTrackerPipeline
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1693812039869
+        repoName: git@github.com:vishalvaidya269/time-tracker.git
+        build: <+input>
+  stages:
+    - stage:
+        name: cloneCode
+        identifier: cloneCode
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: echo "code clone from github account"
+    - stage:
+        name: BuildCode
+        identifier: BuildCode
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: DockerHubConnector
+                    repo: https://hub.docker.com/repository/docker/vaidyavishal269/newcode/
+                    tags:
+                      - AddCodeToDockerHub
+              - step:
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    shell: Sh
+                    command: echo "Atifacts uploaded into Docker Hub Sucessfully."
