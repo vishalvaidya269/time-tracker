@@ -39,11 +39,11 @@ pipeline:
                   identifier: GitClone_1
                   spec:
                     connectorRef: account.Github_OAuth_1693812039869
-                    repoName: git@github.com:vishalvaidya269/time-tracker.git
+                    repoName: git@github.com:vishalvaidya269/go-pipeline-sample.git
                     build:
                       type: branch
                       spec:
-                        branch: master
+                        branch: main
     - stage:
         name: BuildCode
         identifier: BuildCode
